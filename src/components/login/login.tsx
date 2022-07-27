@@ -1,10 +1,14 @@
 import { Button, Checkbox, Form, Input } from "antd";
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext, AuthInterface } from "../../contexts/auth/auth";
 import "./login.css";
 
 const Login: React.FC = () => {
+  const { isLoggedIn, setLoggedIn } = useContext(AuthContext) as AuthInterface;
+  console.log(isLoggedIn);
   const onFinish = (values: any) => {
     console.log("Success:", values);
+    setLoggedIn(true);
   };
 
   const onFinishFailed = (errorInfo: any) => {
