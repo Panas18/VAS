@@ -1,14 +1,21 @@
 import { Button, Checkbox, Form, Input } from "antd";
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { AuthContext, AuthInterface } from "../../contexts/auth/auth";
 import "./login.css";
+import { useEffect } from "react";
 
-const Login: React.FC = () => {
+export const Login: React.FC = () => {
+  const navigation = useNavigate();
   const { isLoggedIn, setLoggedIn } = useContext(AuthContext) as AuthInterface;
-  console.log(isLoggedIn);
-  const onFinish = (values: any) => {
-    console.log("Success:", values);
+  useEffect(() => {
+    console.log(isLoggedIn);
+  });
+
+  const onFinish = () => {
     setLoggedIn(true);
+    localStorage.setItem("isLoggedIn", JSON.stringify(true));
+    navigation({ pathname: "/" });
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -58,5 +65,3 @@ const Login: React.FC = () => {
     </Form>
   );
 };
-
-export default Login;
