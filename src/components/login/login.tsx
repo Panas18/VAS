@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./login.css";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import { loginAction, logoutAction } from "../../store/slice/authSlice";
+import { loginAction } from "../../store/slice/authSlice";
 
 export const Login: React.FC = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,6 @@ export const Login: React.FC = () => {
   };
 
   const onFinishFailed = (errorInfo: any) => {
-    dispatch(loginAction());
     console.log("Failed:", errorInfo);
   };
 
