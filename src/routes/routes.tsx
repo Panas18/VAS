@@ -24,6 +24,7 @@ function AppRoutes() {
         path="/home"
         element={isLoggedIn ? <HomePage /> : <Navigate to="/" />}
       ></Route>
+      <Route path="/" element={<HomePage />}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="*" element={<h1>Page not found</h1>}></Route>
     </Routes>

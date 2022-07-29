@@ -1,24 +1,26 @@
 import { Button, Checkbox, Form, Input } from "antd";
-import React, { useContext } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthContext, AuthInterface } from "../../contexts/auth/auth";
+// import { AuthContext, AuthInterface } from "../../contexts/auth/auth";
 import "./login.css";
-import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { loginAction, logoutAction } from "../../store/slice/authSlice";
 
 export const Login: React.FC = () => {
+  const dispatch = useDispatch();
   const navigation = useNavigate();
-  const { isLoggedIn, setLoggedIn } = useContext(AuthContext) as AuthInterface;
-  useEffect(() => {
-    console.log(isLoggedIn);
-  });
+  const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn.isAuth);
 
   const onFinish = () => {
-    setLoggedIn(true);
     localStorage.setItem("isLoggedIn", JSON.stringify(true));
-    navigation({ pathname: "/" });
+    dispatch(loginAction());
+
+    navigation({ pathname: "/home" });
   };
 
   const onFinishFailed = (errorInfo: any) => {
+    dispatch(loginAction());
     console.log("Failed:", errorInfo);
   };
 
