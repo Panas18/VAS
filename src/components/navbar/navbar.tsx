@@ -1,12 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
-import React, { useContext } from "react";
-import { AuthContext, AuthInterface } from "../../contexts/auth/auth";
+import React from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 export const Navbar: React.FC = () => {
-  const { isLoggedIn, setLoggedIn } = useContext(AuthContext) as AuthInterface;
+  const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn.isAuth);
   const navigation = useNavigate();
   const handleLogout = () => {
-    setLoggedIn(false);
     localStorage.setItem("isLoggedIn", JSON.stringify(false));
     navigation({ pathname: "/login" });
   };
