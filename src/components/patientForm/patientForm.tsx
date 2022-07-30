@@ -1,10 +1,33 @@
 import React from "react";
 import { Button, Form, Input, DatePicker, Radio, Upload, Checkbox } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
+import { useDispatch } from "react-redux";
+import { addPatientDetails } from "../../store/slice/patientRecordSlide";
 
 export const PatientForm: React.FC = () => {
+  const dispatch = useDispatch();
+  const [form] = Form.useForm();
+
   const onFinish = (values: any) => {
-    console.log("Success:", values);
+    const formatedData = {
+      firstName: values.firstname,
+      lastName: values.lastname,
+      dob: values.birthday.format("YYYY-MM-DD").toString(),
+      gender: values.gender,
+      ethinicity: values.ethinicity,
+      address: {
+        street: values.street,
+        state: values.state,
+        city: values.city,
+      },
+      payment: {
+        insuranceId: values.insurance,
+        memberId: values.member,
+        insuranceProvider: values.member,
+      },
+    };
+    dispatch(addPatientDetails(formatedData));
+    form.resetFields();
   };
 
   const onFinishFailed = (errorInfo: any) => {

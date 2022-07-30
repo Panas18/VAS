@@ -8,7 +8,7 @@ import { Button } from "antd/lib/radio";
 
 export const Navbar: React.FC = () => {
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn.isAuth);
+  // const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn.isAuth);
   const navigation = useNavigate();
 
   const handleLogout = () => {
