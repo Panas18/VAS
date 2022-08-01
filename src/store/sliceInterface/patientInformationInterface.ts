@@ -10,7 +10,7 @@ interface insurance {
   insuranceProvider: string;
 }
 
-export interface patientInformationInterface {
+export interface singlePatientInterface {
   firstName: string;
   lastName: string;
   dob: string;
@@ -18,4 +18,8 @@ export interface patientInformationInterface {
   ethinicity: string;
   address: address;
   payment: insurance;
+}
+
+export interface patientInterface {
+  data: singlePatientInterface[];
 }

@@ -4,7 +4,8 @@ import { Login } from "../components/login/login";
 import { HomePage } from "../pages/home";
 import { AboutPage } from "../pages/about";
 import { useEffect } from "react";
-import { PatientPage } from "../pages/patients";
+import { AddPatientPage } from "../pages/addPatientPage";
+import { PatientPage } from "../pages/patients/patients";
 
 function AppRoutes() {
   const navigation = useNavigate();
@@ -27,6 +28,7 @@ function AppRoutes() {
       ></Route>
       <Route path="/" element={<HomePage />}></Route>
       <Route path="/login" element={<Login />}></Route>
+      <Route path="/addpatient" element={<AddPatientPage />}></Route>
       <Route path="/patient" element={<PatientPage />}></Route>
       <Route path="*" element={<h1>Page not found</h1>}></Route>
     </Routes>
