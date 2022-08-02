@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { Button, Form, Input, DatePicker, Radio, Upload, Checkbox } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,7 +9,12 @@ import { singlePatientInterface } from "../../store/sliceInterface/patientInform
 import { RootState } from "../../store/store";
 
 export const PatientForm: React.FC = () => {
+  const [form] = Form.useForm();
   const dispatch = useDispatch();
+  const [check, setCheck] = useState(false);
+  const onCheckboxChange = (e: { target: { checked: boolean } }) => {
+    setCheck(e.target.checked);
+  };
   const patientData = useSelector(
     (state: RootState) => state.patientRecord.data,
   );
@@ -42,9 +48,8 @@ export const PatientForm: React.FC = () => {
   return (
     <div className="patientForm">
       <Form
+        form={form}
         name="basic"
-        // labelCol={{ span: 10 }}
-        // wrapperCol={{ span: 10 }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         initialValues={{ remember: true }}
@@ -156,16 +161,15 @@ export const PatientForm: React.FC = () => {
         <Form.Item
           name="Confirm"
           valuePropName="checked"
-          // wrapperCol={{ offset: 6, span: 10 }}
           rules={[{ required: true, message: "Confirmation Required" }]}
         >
-          <Checkbox>Confirm all information</Checkbox>
+          <Checkbox checked={check} onChange={onCheckboxChange}>
+            Confirm All information
+          </Checkbox>
         </Form.Item>
-        <Form.Item
-        // wrapperCol={{ offset: 6, span: 10 }}
-        >
-          <Button type="primary" htmlType="submit">
-            Submit
+        <Form.Item>
+          <Button type="primary" htmlType="submit" disabled={!check}>
+            Add Patient
           </Button>
         </Form.Item>
       </Form>
