@@ -20,6 +20,7 @@ export interface singlePatientInterface {
   payment: insurance;
 }
 
-export interface patientInterface {
+export interface patientListInterface {
+  // list of singlePatientInterface
   data: singlePatientInterface[];
 }

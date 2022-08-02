@@ -1,16 +1,14 @@
-import { Button, Checkbox, Divider, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input } from "antd";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-// import { AuthContext, AuthInterface } from "../../contexts/auth/auth";
 import "./login.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // import { RootState } from "../../store/store";
 import { loginAction } from "../../store/slice/authSlice";
 
 export const Login: React.FC = () => {
   const dispatch = useDispatch();
   const navigation = useNavigate();
-  // const isLoggedIn = useSelector((state: RootState) => state.isLoggedIn.isAuth);
 
   const onFinish = () => {
     localStorage.setItem("isLoggedIn", JSON.stringify(true));

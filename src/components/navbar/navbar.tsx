@@ -1,7 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../../store/store";
+import { useDispatch } from "react-redux";
 import { logoutAction } from "../../store/slice/authSlice";
 import "./navbar.css";
 import { Button } from "antd/lib/radio";

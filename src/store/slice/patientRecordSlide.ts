@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
-  patientInterface,
+  patientListInterface,
   singlePatientInterface,
 } from "../sliceInterface/patientInformationInterface";
 
-const initialState: patientInterface = {
+const initialState: patientListInterface = {
   data: [],
 };
 
@@ -13,7 +13,7 @@ export const patientInformationSlice = createSlice({
   initialState,
   reducers: {
     addPatientDetails: (
-      state: patientInterface,
+      state: patientListInterface,
       action: PayloadAction<singlePatientInterface>,
     ) => {
       state.data.push(action.payload);
