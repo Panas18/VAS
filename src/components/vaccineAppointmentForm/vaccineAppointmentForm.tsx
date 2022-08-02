@@ -2,7 +2,6 @@ import {
   Form,
   Input,
   DatePicker,
-  Space,
   Select,
   TimePicker,
   Radio,
@@ -11,20 +10,45 @@ import {
 } from "antd";
 import moment from "moment";
 import React from "react";
+import { useDispatch } from "react-redux";
 import "./vaccineAppointmentForm.css";
+import { singleVaccineAppointmentInterface } from "../../store/sliceInterface/vaccineAppointmentInterface";
+import { addVaccineAppointment } from "../../store/slice/vaccineAppointmentSlice";
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 
 export const VaccineAppointmentForm: React.FC = () => {
+  const dispatch = useDispatch();
+  const [form] = Form.useForm();
+  const onFinish = (values: any) => {
+    const formattedData: singleVaccineAppointmentInterface = {
+      servicename: values.servicename,
+      sitelocation: values.servicelocation,
+      startdate: values.date[0].format("YYYY-MM-DD").toString(),
+      enddate: values.date[1].format("YYYY-MM-DD").toString(),
+      duration: values.duration.format("HH-mm-ss").toString(),
+      dosetype: values.dosetype,
+      gender: values.gender,
+      age: values.age,
+      ethinicity: values.ethinicity,
+    };
+
+    dispatch(addVaccineAppointment(formattedData));
+    form.resetFields();
+  };
+  const onFinishFailed = (errorInfo: any) => {
+    console.log("Failed:", errorInfo);
+  };
   return (
     <div className="vaccineAppointmentForm">
       <Form
         name="basic"
+        form={form}
         initialValues={{ remember: true }}
         autoComplete="off"
-        // onFinish={onFinish}
-        // onFinishFailed={onFinishFailed}
+        onFinish={onFinish}
+        onFinishFailed={onFinishFailed}
       >
         <Form.Item
           label="Service Name"
@@ -45,9 +69,7 @@ export const VaccineAppointmentForm: React.FC = () => {
           name="date"
           rules={[{ required: true, message: "Please input date range!" }]}
         >
-          <Space direction="vertical" size={12}>
-            <RangePicker />
-          </Space>
+          <RangePicker />
         </Form.Item>
         <Form.Item
           label="DoseType"
