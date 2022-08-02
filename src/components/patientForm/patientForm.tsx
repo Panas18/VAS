@@ -1,7 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import { Button, Form, Input, DatePicker, Radio, Upload, Checkbox } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { addPatientDetails } from "../../store/slice/patientRecordSlide";
 import "./patientForm.css";
@@ -149,14 +148,6 @@ export const PatientForm: React.FC = () => {
           >
             <Input placeholder="Insurance Provider" />
           </Form.Item>
-        </Form.Item>
-        <Form.Item label="Upload" valuePropName="fileList">
-          <Upload action="/upload.do" listType="picture-card">
-            <div>
-              <PlusOutlined />
-              <div style={{ marginTop: 8 }}>Upload</div>
-            </div>
-          </Upload>
         </Form.Item>
         <Form.Item
           name="Confirm"
