@@ -1,35 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { patientInformationInterface } from "../sliceInterface/patientInformationInterface";
+import {
+  patientListInterface,
+  singlePatientInterface,
+} from "../sliceInterface/patientInformationInterface";
 
-const initialPatientDetails: patientInformationInterface = {
-  firstName: "",
-  lastName: "",
-  dob: "",
-  gender: "",
-  ethinicity: "",
-  address: {
-    street: "",
-    state: "",
-    city: "",
-  },
-  payment: {
-    insuranceId: "",
-    memberId: "",
-    insuranceProvider: "",
-  },
+const initialState: patientListInterface = {
+  data: [],
 };
 
 export const patientInformationSlice = createSlice({
   name: "patientInformation",
-  initialState: {
-    data: initialPatientDetails,
-  },
+  initialState,
   reducers: {
     addPatientDetails: (
-      state,
-      action: PayloadAction<patientInformationInterface>,
+      state: patientListInterface,
+      action: PayloadAction<singlePatientInterface>,
     ) => {
-      state.data = action.payload;
+      state.data.push(action.payload);
     },
   },
 });

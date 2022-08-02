@@ -1,15 +1,26 @@
 import React from "react";
+import { useState } from "react";
 import { Button, Form, Input, DatePicker, Radio, Upload, Checkbox } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addPatientDetails } from "../../store/slice/patientRecordSlide";
+import "./patientForm.css";
+import { singlePatientInterface } from "../../store/sliceInterface/patientInformationInterface";
+import { RootState } from "../../store/store";
 
 export const PatientForm: React.FC = () => {
-  const dispatch = useDispatch();
   const [form] = Form.useForm();
+  const dispatch = useDispatch();
+  const [check, setCheck] = useState(false);
+  const onCheckboxChange = (e: { target: { checked: boolean } }) => {
+    setCheck(e.target.checked);
+  };
+  const patientData = useSelector(
+    (state: RootState) => state.patientRecord.data,
+  );
 
   const onFinish = (values: any) => {
-    const formatedData = {
+    const formatedData: singlePatientInterface = {
       firstName: values.firstname,
       lastName: values.lastname,
       dob: values.birthday.format("YYYY-MM-DD").toString(),
@@ -27,18 +38,18 @@ export const PatientForm: React.FC = () => {
       },
     };
     dispatch(addPatientDetails(formatedData));
-    form.resetFields();
+    localStorage.setItem("patientData", JSON.stringify(patientData));
+    console.log(patientData.length);
   };
 
   const onFinishFailed = (errorInfo: any) => {
     console.log("Failed:", errorInfo);
   };
   return (
-    <div>
+    <div className="patientForm">
       <Form
+        form={form}
         name="basic"
-        labelCol={{ span: 6 }}
-        wrapperCol={{ span: 5 }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         initialValues={{ remember: true }}
@@ -150,14 +161,15 @@ export const PatientForm: React.FC = () => {
         <Form.Item
           name="Confirm"
           valuePropName="checked"
-          wrapperCol={{ offset: 5, span: 16 }}
           rules={[{ required: true, message: "Confirmation Required" }]}
         >
-          <Checkbox>All the information I entered is true</Checkbox>
+          <Checkbox checked={check} onChange={onCheckboxChange}>
+            Confirm All information
+          </Checkbox>
         </Form.Item>
-        <Form.Item wrapperCol={{ offset: 4, span: 16 }}>
-          <Button type="primary" htmlType="submit">
-            Submit
+        <Form.Item>
+          <Button type="primary" htmlType="submit" disabled={!check}>
+            Add Patient
           </Button>
         </Form.Item>
       </Form>
