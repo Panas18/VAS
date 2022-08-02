@@ -12,7 +12,6 @@ export const Navbar: React.FC = () => {
 
   const handleLogout = () => {
     dispatch(logoutAction());
-    localStorage.setItem("isLoggedIn", JSON.stringify(false));
     navigation({ pathname: "/login" });
   };
   return (

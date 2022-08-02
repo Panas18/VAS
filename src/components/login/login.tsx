@@ -11,7 +11,6 @@ export const Login: React.FC = () => {
   const navigation = useNavigate();
 
   const onFinish = () => {
-    localStorage.setItem("isLoggedIn", JSON.stringify(true));
     dispatch(loginAction());
 
     navigation({ pathname: "/home" });
