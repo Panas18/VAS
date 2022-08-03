@@ -1,12 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { Button, Form, Input, DatePicker, Radio, Upload, Checkbox } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { addPatientDetails } from "../../store/slice/patientRecordSlide";
 import "./patientForm.css";
 import { singlePatientInterface } from "../../store/sliceInterface/patientInformationInterface";
-import { RootState } from "../../store/store";
 
 export const PatientForm: React.FC = () => {
   const [form] = Form.useForm();
@@ -15,9 +13,6 @@ export const PatientForm: React.FC = () => {
   const onCheckboxChange = (e: { target: { checked: boolean } }) => {
     setCheck(e.target.checked);
   };
-  const patientData = useSelector(
-    (state: RootState) => state.patientRecord.data,
-  );
 
   const onFinish = (values: any) => {
     const formatedData: singlePatientInterface = {
@@ -38,8 +33,6 @@ export const PatientForm: React.FC = () => {
       },
     };
     dispatch(addPatientDetails(formatedData));
-    localStorage.setItem("patientData", JSON.stringify(patientData));
-    console.log(patientData.length);
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -149,14 +142,6 @@ export const PatientForm: React.FC = () => {
           >
             <Input placeholder="Insurance Provider" />
           </Form.Item>
-        </Form.Item>
-        <Form.Item label="Upload" valuePropName="fileList">
-          <Upload action="/upload.do" listType="picture-card">
-            <div>
-              <PlusOutlined />
-              <div style={{ marginTop: 8 }}>Upload</div>
-            </div>
-          </Upload>
         </Form.Item>
         <Form.Item
           name="Confirm"

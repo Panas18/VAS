@@ -20,6 +20,7 @@ export const Navbar: React.FC = () => {
         <NavLink to="/">Home</NavLink>
         <NavLink to="/about">About</NavLink>
         <NavLink to="/patient">Patient</NavLink>
+        <NavLink to="/vaccine-appointment">Vaccine Appointment</NavLink>
       </div>
       <div className="navbar--button">
         <Button onClick={handleLogout} type="primary">
