@@ -10,6 +10,6 @@ export interface singleVaccineServiceInterface {
   ethinicity: string;
 }
 
-export interface vaccineAppointmentListInterface {
+export interface vaccineServiceListInterface {
   data: singleVaccineServiceInterface[];
 }

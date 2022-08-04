@@ -12,8 +12,8 @@ import moment from "moment";
 import React from "react";
 import { useDispatch } from "react-redux";
 import "./vaccineServiceForm.css";
-import { singleVaccineServiceInterface } from "../../store/sliceInterface/vaccineAppointmentInterface";
-import { addVaccineAppointment } from "../../store/slice/vaccineAppointmentSlice";
+import { singleVaccineServiceInterface } from "../../store/sliceInterface/serviceInterface";
+import { addService } from "../../store/slice/serviceSlice";
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
@@ -34,7 +34,7 @@ export const VaccineServiceForm: React.FC = () => {
       ethinicity: values.ethinicity,
     };
 
-    dispatch(addVaccineAppointment(formattedData));
+    dispatch(addService(formattedData));
     form.resetFields();
   };
   const onFinishFailed = (errorInfo: any) => {

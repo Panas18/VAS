@@ -1,12 +1,24 @@
 import React from "react";
 import { Button, Form, Input, Select } from "antd";
 import "./appointmentForm.css";
+import { useDispatch } from "react-redux";
+import { appointmentInterface } from "../../store/sliceInterface/appointmentInterface";
+import { addAppointment } from "../../store/slice/appointmentSlice";
 
 const { Option } = Select;
 
 export const AppointmentForm: React.FC = () => {
+  const dispatch = useDispatch();
+  const [form] = Form.useForm();
   const onFinish = (values: any) => {
-    console.log("Success:", values);
+    const foramttedData: appointmentInterface = {
+      patientId: values.patientId,
+      siteLocation: values.siteLocation,
+      serviceType: values.serviceType,
+      confirmationCode: values.confirmationCode,
+    };
+    dispatch(addAppointment(foramttedData));
+    form.resetFields();
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -16,6 +28,7 @@ export const AppointmentForm: React.FC = () => {
     <div className="appointmentForm">
       <Form
         name="appointment"
+        form={form}
         initialValues={{ remember: true }}
         autoComplete="off"
         onFinish={onFinish}
@@ -48,7 +61,7 @@ export const AppointmentForm: React.FC = () => {
           </Select>
         </Form.Item>
         <Form.Item
-          label="Service Typ"
+          label="Service Type"
           name="serviceType"
           rules={[{ required: true, message: "Please select service type!" }]}
         >
