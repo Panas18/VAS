@@ -11,18 +11,18 @@ import {
 import moment from "moment";
 import React from "react";
 import { useDispatch } from "react-redux";
-import "./vaccineAppointmentForm.css";
-import { singleVaccineAppointmentInterface } from "../../store/sliceInterface/vaccineAppointmentInterface";
+import "./vaccineServiceForm.css";
+import { singleVaccineServiceInterface } from "../../store/sliceInterface/vaccineAppointmentInterface";
 import { addVaccineAppointment } from "../../store/slice/vaccineAppointmentSlice";
 
 const { RangePicker } = DatePicker;
 const { Option } = Select;
 
-export const VaccineAppointmentForm: React.FC = () => {
+export const VaccineServiceForm: React.FC = () => {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const onFinish = (values: any) => {
-    const formattedData: singleVaccineAppointmentInterface = {
+    const formattedData: singleVaccineServiceInterface = {
       servicename: values.servicename,
       sitelocation: values.servicelocation,
       startdate: values.date[0].format("YYYY-MM-DD").toString(),
@@ -41,7 +41,7 @@ export const VaccineAppointmentForm: React.FC = () => {
     console.log("Failed:", errorInfo);
   };
   return (
-    <div className="vaccineAppointmentForm">
+    <div className="vaccineServiceForm">
       <Form
         name="basic"
         form={form}
@@ -124,7 +124,7 @@ export const VaccineAppointmentForm: React.FC = () => {
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
-            Add Vaccine Appointment
+            Add Vaccine Service
           </Button>
         </Form.Item>
       </Form>
