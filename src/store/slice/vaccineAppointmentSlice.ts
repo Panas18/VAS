@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import {
-  singleVaccineAppointmentInterface,
+  singleVaccineServiceInterface,
   vaccineAppointmentListInterface,
 } from "../sliceInterface/vaccineAppointmentInterface";
 
@@ -15,7 +15,7 @@ export const vaccineAppointmentSlice = createSlice({
   reducers: {
     addVaccineAppointment: (
       state: vaccineAppointmentListInterface,
-      action: PayloadAction<singleVaccineAppointmentInterface>,
+      action: PayloadAction<singleVaccineServiceInterface>,
     ) => {
       state.data.push(action.payload);
     },

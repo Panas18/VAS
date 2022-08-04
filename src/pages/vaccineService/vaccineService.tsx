@@ -2,12 +2,12 @@ import { Navbar } from "../../components/navbar/navbar";
 import React from "react";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
-import "./vaccineAppointment.css";
+import "./vaccineService.css";
 
-export const VaccineAppointmentPage: React.FC = () => {
+export const VaccineServicePage: React.FC = () => {
   const navigate = useNavigate();
   const handleAddButton = () => {
-    navigate({ pathname: "/add-vaccine-appointment" });
+    navigate({ pathname: "/add-vaccine-service" });
   };
   return (
     <div>

@@ -1,7 +1,7 @@
-export interface singleVaccineAppointmentInterface {
+export interface singleVaccineServiceInterface {
   servicename: string;
   sitelocation: string;
-  startdate:string
+  startdate: string;
   enddate: string;
   dosetype: string;
   duration: string;
@@ -11,5 +11,5 @@ export interface singleVaccineAppointmentInterface {
 }
 
 export interface vaccineAppointmentListInterface {
-  data: singleVaccineAppointmentInterface[];
+  data: singleVaccineServiceInterface[];
 }
