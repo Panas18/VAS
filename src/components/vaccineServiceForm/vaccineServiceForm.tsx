@@ -43,7 +43,7 @@ export const VaccineServiceForm: React.FC = () => {
   return (
     <div className="vaccineServiceForm">
       <Form
-        name="basic"
+        name="service"
         form={form}
         initialValues={{ remember: true }}
         autoComplete="off"
