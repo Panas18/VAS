@@ -9,6 +9,8 @@ import {
   PatientPage,
   VaccineServicePage,
   AddVaccineServicePage,
+  AppointmentPage,
+  AddAppointmentPage,
 } from "../pages/index";
 
 function AppRoutes() {
@@ -32,13 +34,12 @@ function AppRoutes() {
       ></Route>
       <Route path="/" element={<HomePage />}></Route>
       <Route path="/login" element={<Login />}></Route>
-      <Route path="/add-patient" element={<AddPatientPage />}></Route>
+      <Route path="/patient/add" element={<AddPatientPage />}></Route>
       <Route path="/patient" element={<PatientPage />}></Route>
-      <Route path="/vaccine-service" element={<VaccineServicePage />}></Route>
-      <Route
-        path="/add-vaccine-service"
-        element={<AddVaccineServicePage />}
-      ></Route>
+      <Route path="/service" element={<VaccineServicePage />}></Route>
+      <Route path="/service/add" element={<AddVaccineServicePage />}></Route>
+      <Route path="/appointment" element={<AppointmentPage />}></Route>
+      <Route path="/appointment/add" element={<AddAppointmentPage />}></Route>
       <Route path="*" element={<h1>Page not found</h1>}></Route>
     </Routes>
   );

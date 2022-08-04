@@ -7,14 +7,14 @@ import "./vaccineService.css";
 export const VaccineServicePage: React.FC = () => {
   const navigate = useNavigate();
   const handleAddButton = () => {
-    navigate({ pathname: "/add-vaccine-service" });
+    navigate({ pathname: "/service/add" });
   };
   return (
     <div>
       <Navbar />
       <div className="addBtn">
         <Button onClick={handleAddButton} type="primary">
-          Add Vaccine Appointment
+          Add Vaccine Service
         </Button>
       </div>
     </div>
