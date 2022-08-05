@@ -1,9 +1,3 @@
-.addBtn {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-}
-
 .patientContainer {
   max-width: 1200px;
   width: 100%;
@@ -17,6 +11,6 @@
 
 .patient--header {
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-between;
   align-items: center;
 }
