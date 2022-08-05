@@ -1,6 +1,6 @@
 import { Navbar } from "../../components/navbar/navbar";
 import React from "react";
-import { Button, Space, Table } from "antd";
+import { Button, Table } from "antd";
 import type { ColumnsType } from "antd/lib/table";
 import { useNavigate } from "react-router-dom";
 import "./patients.css";
@@ -49,7 +49,7 @@ const columns: ColumnsType<DataType> = [
     title: "Action",
     key: "action",
     render: () => (
-      <div style={{ display: "flex", justifyContent:"space-between" }}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
         <a href=" # ">View</a>
         <a href=" # " style={{ color: "red" }}>
           Delete
@@ -104,7 +104,7 @@ export const PatientPage: React.FC = () => {
               Patient's list
             </span>
           </div>
-          <div className="patient--btn">
+          <div>
             <Button onClick={handleAddButton} type="primary">
               Add New Patient
             </Button>
