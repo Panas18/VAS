@@ -1,14 +1,20 @@
-import { Navbar } from "../../components/navbar/navbar";
 import React from "react";
+import { useEffect } from "react";
 import { Button, Table } from "antd";
 import type { ColumnsType } from "antd/lib/table";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { getAllPatients } from "../../service/backEnd";
+import { Navbar } from "../../components/navbar/navbar";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { addPatientsList } from "../../store/slice/patientRecordSlide";
+import Patient from "../../store/sliceInterface/patient";
 import "./patients.css";
 
 interface DataType {
-  patientId: number;
-  firstName: string;
-  lastName: string;
+  patient_id: number;
+  first_name: string;
+  last_name: string;
   dob: string;
   gender: string;
   ethinicity: string;
@@ -17,18 +23,18 @@ interface DataType {
 const columns: ColumnsType<DataType> = [
   {
     title: "Patient ID",
-    dataIndex: "patientId",
-    key: "patientId",
+    dataIndex: "patient_id",
+    key: "patient_id",
   },
   {
     title: "First Name",
-    dataIndex: "firstName",
-    key: "firstName",
+    dataIndex: "first_name",
+    key: "first_name",
   },
   {
     title: "Last Name",
-    dataIndex: "lastName",
-    key: "lastName",
+    dataIndex: "last_name",
+    key: "last_name",
   },
   {
     title: "Date of Birth",
@@ -50,42 +56,44 @@ const columns: ColumnsType<DataType> = [
     key: "action",
     render: () => (
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <a href=" # ">View</a>
-        <a href=" # " style={{ color: "red" }}>
-          Delete
-        </a>
+        <Link to="/patient">View</Link>
       </div>
     ),
   },
 ];
 
-const data: DataType[] = [
-  {
-    patientId: 1,
-    firstName: "Mike",
-    lastName: "Lal",
-    dob: "1999-12-12",
-    gender: "Male",
-    ethinicity: "Hindu",
-  },
-  {
-    patientId: 2,
-    firstName: "Hari",
-    lastName: "Krishna",
-    dob: "1945-06-04",
-    gender: "Male",
-    ethinicity: "Christan",
-  },
-  {
-    patientId: 3,
-    firstName: "Shyam",
-    lastName: "Singh",
-    dob: "1989-02-30",
-    gender: "female",
-    ethinicity: "Buddhist",
-  },
-];
+const formatData = (patient: Patient) => {
+  const tableData = {
+    patient_id: +patient.id,
+    first_name: patient.first_name,
+    last_name: patient.last_name,
+    dob: patient.dob,
+    gender: patient.gender,
+    ethinicity: patient.ethinicity,
+  };
+
+  return tableData;
+};
 export const PatientPage: React.FC = () => {
+  const dispatch = useDispatch();
+  // get all patients list from backend server
+  useEffect(() => {
+    const getAllData = async () => {
+      const patients = await getAllPatients();
+      dispatch(addPatientsList(patients));
+    };
+    try {
+      getAllData();
+    } catch {
+      console.log("error fetching data");
+    }
+  }, [dispatch]);
+
+  const patientRecord = useSelector(
+    (state: RootState) => state.patientRecord.data,
+  );
+
+  const data = patientRecord.map(formatData);
   const navigate = useNavigate();
   const handleAddButton = () => {
     navigate({ pathname: "/patient/add" });

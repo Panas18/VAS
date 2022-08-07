@@ -1,38 +1,33 @@
 import React from "react";
 import { useState } from "react";
-import { Button, Form, Input, DatePicker, Radio, Upload, Checkbox } from "antd";
-import { useDispatch} from "react-redux";
-import { addPatientDetails } from "../../store/slice/patientRecordSlide";
+import { Button, Form, Input, DatePicker, Radio, Checkbox } from "antd";
+// import { useDispatch } from "react-redux";
+// import { addPatient } from "../../store/slice/patientRecordSlide";
 import "./patientForm.css";
-import { singlePatientInterface } from "../../store/sliceInterface/patientInformationInterface";
 
 export const PatientForm: React.FC = () => {
   const [form] = Form.useForm();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [check, setCheck] = useState(false);
   const onCheckboxChange = (e: { target: { checked: boolean } }) => {
     setCheck(e.target.checked);
   };
 
   const onFinish = (values: any) => {
-    const formatedData: singlePatientInterface = {
-      firstName: values.firstname,
-      lastName: values.lastname,
-      dob: values.birthday.format("YYYY-MM-DD").toString(),
-      gender: values.gender,
-      ethinicity: values.ethinicity,
-      address: {
-        street: values.street,
-        state: values.state,
-        city: values.city,
-      },
-      payment: {
-        insuranceId: values.insurance,
-        memberId: values.member,
-        insuranceProvider: values.member,
-      },
-    };
-    dispatch(addPatientDetails(formatedData));
+    // const formatedData: PatientToInsert = {
+    //   firstName: values.firstname,
+    //   lastName: values.lastname,
+    //   dob: values.birthday.format("YYYY-MM-DD").toString(),
+    //   gender: values.gender,
+    //   ethinicity: values.ethinicity,
+    //   street: values.street,
+    //   state: values.state,
+    //   city: values.city,
+    //   insuranceId: values.insurance,
+    //   memberId: values.member,
+    //   insuranceProvider: values.member,
+    // };
+    // dispatch(addPatient(formatedData));
   };
 
   const onFinishFailed = (errorInfo: any) => {
