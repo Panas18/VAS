@@ -1,25 +1,25 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {
-  patientListInterface,
-  singlePatientInterface,
-} from "../sliceInterface/patientInformationInterface";
+import IPatient from "../sliceInterface/patient";
 
-const initialState: patientListInterface = {
-  data: [],
-};
+interface state {
+  data: IPatient[];
+}
 
-export const patientInformationSlice = createSlice({
+export const patientSlice = createSlice({
   name: "patientInformation",
-  initialState,
+  initialState: {
+    data: [] as IPatient[],
+  },
   reducers: {
-    addPatientDetails: (
-      state: patientListInterface,
-      action: PayloadAction<singlePatientInterface>,
-    ) => {
-      state.data.push(action.payload);
+    // addPatient: (state: state, action: PayloadAction<IPatient>) => {
+    //   state.data.push(action.payload);
+    // },
+
+    addPatientsList: (state: state, action: PayloadAction<IPatient[]>) => {
+      state.data = action.payload;
     },
   },
 });
 
-export const { addPatientDetails } = patientInformationSlice.actions;
-export default patientInformationSlice.reducer;
+export const { addPatientsList } = patientSlice.actions;
+export default patientSlice.reducer;
