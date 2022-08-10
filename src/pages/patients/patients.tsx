@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { Button, Table } from "antd";
+import moment from "moment";
 import type { ColumnsType } from "antd/lib/table";
 import { useNavigate, Link } from "react-router-dom";
 import { getAllPatients } from "../../service/backEnd";
@@ -82,11 +83,7 @@ export const PatientPage: React.FC = () => {
       const patients = await getAllPatients();
       dispatch(addPatientsList(patients));
     };
-    try {
-      getAllData();
-    } catch {
-      console.log("error fetching data");
-    }
+    getAllData();
   }, [dispatch]);
 
   const patientRecord = useSelector(

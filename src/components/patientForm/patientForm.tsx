@@ -2,8 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { Button, Form, Input, DatePicker, Radio, Checkbox } from "antd";
 // import { useDispatch } from "react-redux";
-// import { addPatient } from "../../store/slice/patientRecordSlide";
+import { PatientToInsert } from "../../store/sliceInterface/patient";
 import "./patientForm.css";
+import { httpMethods, BACKEND_URL } from "../../common/common";
 
 export const PatientForm: React.FC = () => {
   const [form] = Form.useForm();
@@ -13,21 +14,33 @@ export const PatientForm: React.FC = () => {
     setCheck(e.target.checked);
   };
 
-  const onFinish = (values: any) => {
-    // const formatedData: PatientToInsert = {
-    //   firstName: values.firstname,
-    //   lastName: values.lastname,
-    //   dob: values.birthday.format("YYYY-MM-DD").toString(),
-    //   gender: values.gender,
-    //   ethinicity: values.ethinicity,
-    //   street: values.street,
-    //   state: values.state,
-    //   city: values.city,
-    //   insuranceId: values.insurance,
-    //   memberId: values.member,
-    //   insuranceProvider: values.member,
-    // };
-    // dispatch(addPatient(formatedData));
+  const onFinish = async (values: any) => {
+    const formatedData: PatientToInsert = {
+      first_name: values.first_name,
+      last_name: values.last_name,
+      dob: values.dob.format("YYYY-MM-DD").toString(),
+      gender: values.gender,
+      email: values.email,
+      ethinicity: values.ethinicity,
+      street: values.street,
+      state: values.state,
+      city: values.city,
+      insurance_id: values.insurance_id,
+      member_id: values.member_id,
+      insurance_provider: values.insurance_provider,
+    };
+
+    try {
+      console.log(formatedData);
+
+      await fetch(`${BACKEND_URL}patient/add`, {
+        method: httpMethods.POST,
+        body: JSON.stringify(formatedData),
+        headers: { "Content-Type": "application/json" },
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -45,22 +58,22 @@ export const PatientForm: React.FC = () => {
       >
         <Form.Item
           label="First Name"
-          name="firstname"
+          name="first_name"
           rules={[{ required: true, message: "Please input your first name" }]}
         >
           <Input placeholder="First Name" />
         </Form.Item>
         <Form.Item
           label="Last Name"
-          name="lastname"
+          name="last_name"
           rules={[{ required: true, message: "Please input your last name" }]}
         >
           <Input placeholder="Last Name" />
         </Form.Item>
         <Form.Item
-          label="Birthday"
-          name="birthday"
-          rules={[{ required: true, message: "Please enter your birthday" }]}
+          label="Date of Birth"
+          name="dob"
+          rules={[{ required: true, message: "Please enter your dob" }]}
         >
           <DatePicker />
         </Form.Item>
@@ -117,21 +130,21 @@ export const PatientForm: React.FC = () => {
         </Form.Item>
         <Form.Item label="Payment" rules={[{ required: true }]}>
           <Form.Item
-            name="insurence"
+            name="insurance_id"
             rules={[{ required: true }]}
             style={{ display: "inline-block" }}
           >
             <Input placeholder="Insurence ID" />
           </Form.Item>
           <Form.Item
-            name="member"
+            name="member_id"
             rules={[{ required: true }]}
             style={{ display: "inline-block" }}
           >
             <Input placeholder="Member ID" />
           </Form.Item>
           <Form.Item
-            name="insuranceProvider"
+            name="insurance_provider"
             rules={[{ required: true }]}
             style={{ display: "inline-block" }}
           >
@@ -144,7 +157,7 @@ export const PatientForm: React.FC = () => {
           rules={[{ required: true, message: "Confirmation Required" }]}
         >
           <Checkbox checked={check} onChange={onCheckboxChange}>
-            Confirm All information
+            I Agree
           </Checkbox>
         </Form.Item>
         <Form.Item>
