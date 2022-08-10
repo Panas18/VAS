@@ -11,10 +11,6 @@ export const patientSlice = createSlice({
     data: [] as IPatient[],
   },
   reducers: {
-    // addPatient: (state: state, action: PayloadAction<IPatient>) => {
-    //   state.data.push(action.payload);
-    // },
-
     addPatientsList: (state: state, action: PayloadAction<IPatient[]>) => {
       state.data = action.payload;
     },

@@ -3,6 +3,7 @@ export default interface Patient {
   first_name: string;
   last_name: string;
   dob: string;
+  email: string;
   gender: string;
   ethinicity: string;
   state: string;
